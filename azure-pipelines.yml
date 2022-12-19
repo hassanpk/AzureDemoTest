@@ -27,9 +27,10 @@ steps:
 
 - task: VSBuild@1
   inputs:
-      solution: '**\*.sln'
-      clean: true
-      configuration: '$(buildConfiguration)' 
+    solution: '$(solution)'
+    msbuildArgs: ' /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:publishUrl="$(Build.ArtifactStagingDirectory)\\WebAppContent"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
        
 
 - task: PublishBuildArtifacts@1
